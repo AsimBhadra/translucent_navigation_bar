@@ -66,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TranslucentNavigationBarItem(
             iconData: PhosphorIcons.chat,
+          ),TranslucentNavigationBarItem(
+            iconData: PhosphorIcons.chat,
           ),
           TranslucentNavigationBarItem(
             iconData: PhosphorIcons.gear,

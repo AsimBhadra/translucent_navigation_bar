@@ -1,39 +1,89 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+Translucent navigation bar with Glassmorphism effect
+## Getting Started
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+To install, add it to your `pubspec.yaml` file:
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+```
+dependencies:
+    translucent_navigation_bar:
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
 ```
 
-## Additional information
+```dart
+import 'package:translucent_navigation_bar/src/translucent_navigation_bar_item.dart';
+```
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+# Make sure extentBody in your Scaffold is set to true
+          extendBody: true,
+
+## If you want to have a main icon make sure the number of items is even so that main icon is in the center
+
+## Basic Implementation
+
+```dart
+return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: TranslucentNavigationBar(
+        mainTranslucentNavigationBarItem: TranslucentNavigationBarItem(
+          iconData: PhosphorIcons.plus,
+        ),
+        onTap: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
+          _pageController.animateToPage(
+            selectedIndex,
+            duration: const Duration(milliseconds:750),
+            curve: Curves.bounceIn,
+          );
+        },
+        onMainIconTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AlertDialog(
+              title: Text('Main Icon pressed'),
+            ),
+          );
+        },
+        selectedIndex: selectedIndex,
+        mainIconBackgroundColor: const Color(0xff0066ff),
+        mainIconColor: Colors.white,
+        items: [
+          TranslucentNavigationBarItem(
+            iconData: PhosphorIcons.houseSimple,
+          ),
+          TranslucentNavigationBarItem(
+            iconData: PhosphorIcons.chat,
+          ),
+          ),
+        ],
+      ),
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        children: [
+
+        ],
+      ),
+    );
+```
+
+## The constructor has these attributes related to the Widget:
+
+- `items`: A list of tabs to display which must be list of `TranslucentNavigationBarItem`
+- `height`: Height of the AppBar `(default: 75.0)`
+- `width`: Width of the AppBar `(default: double.infinity)`
+- `borderRadius`: Border radius of the AppBar `(default: 40.0)`
+- `blur`: Blur extent of AppBar `(default: 20.0)`
+- `verticalPadding`: Padding on the top and bottom of AppBar `(default: 25.0)`
+- `horizontalPadding`: Padding on the left and right sides of AppBar `(default: 20.0)`
+- `onTap`: Returns the index of the tab that was tapped
+- `selectedIndex`: The tab to display.
+- `selectedColor`: The color of the icon when the item is   selected.
+- `unselectedColor`: The color of the icon when the item is   unselected.
+- `mainTranslucentNavigationBarItem`: Main icon of TranslucentNavigationBar must be `TranslucentNavigationBarItem`
+- `mainIconBackgroundColor`: Main icon background color in middle of AppBar
+- `mainIconColor`: Main icon  color in middle of AppBar
+
+- `onMainIconTap`: Main icon function on tap

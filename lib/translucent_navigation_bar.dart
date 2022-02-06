@@ -6,11 +6,11 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:translucent_navigation_bar/src/translucent_navigation_bar_item.dart';
 
 class TranslucentNavigationBar extends StatelessWidget {
-  const TranslucentNavigationBar({
+  TranslucentNavigationBar({
     Key? key,
     required this.items,
     this.selectedColor = Colors.black,
-    this.unselectedColor = Colors.black38,
+    this.unselectedColor = Colors.black26,
     required this.selectedIndex,
     this.mainIconBackgroundColor = Colors.blue,
     this.mainIconColor = Colors.white,
@@ -20,7 +20,13 @@ class TranslucentNavigationBar extends StatelessWidget {
     this.borderRadius = 40.0,
     this.blur = 20.0,
     this.mainTranslucentNavigationBarItem,
-  }) : super(key: key);
+    this.verticalPadding = 25.0,
+    this.horizontalPadding = 20.0,
+  })  : assert(items.length > 2),
+        assert(items.length < 6),
+        assert(mainTranslucentNavigationBarItem != null
+            ? items.length.isEven
+            : items.isNotEmpty);
 
   /// Height of the appbar
   final double height;
@@ -30,6 +36,12 @@ class TranslucentNavigationBar extends StatelessWidget {
 
   /// Blur extent of the appbar
   final double blur;
+
+  /// Padding on the top and bottom of AppBar
+  final double verticalPadding;
+
+  /// Padding on the left and right sides of AppBar
+  final double horizontalPadding;
 
   /// List of TranslucentNavigationBarItems
   final List<TranslucentNavigationBarItem> items;
@@ -52,7 +64,7 @@ class TranslucentNavigationBar extends StatelessWidget {
   /// Main icon background color in middle of appbar
   final Color mainIconBackgroundColor;
 
-  /// Main icon icon color in middle of appbar
+  /// Main icon  color in middle of appbar
   final Color mainIconColor;
 
   /// Main icon function on tap
@@ -94,7 +106,8 @@ class TranslucentNavigationBar extends StatelessWidget {
             Colors.transparent.withOpacity(0.0),
           ],
         ),
-        margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+        margin: EdgeInsets.symmetric(
+            vertical: verticalPadding, horizontal: horizontalPadding),
         height: height,
         width: double.infinity,
         child: Center(
@@ -102,7 +115,8 @@ class TranslucentNavigationBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               for (final item in updatedItems)
-                updatedItems.indexOf(item) == middleIndex
+                (updatedItems.indexOf(item) == middleIndex &&
+                        mainTranslucentNavigationBarItem != null)
                     ? GestureDetector(
                         onTap: onMainIconTap,
                         child: Container(
@@ -111,11 +125,11 @@ class TranslucentNavigationBar extends StatelessWidget {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: mainIconBackgroundColor.withOpacity(0.3),
-                                blurRadius: 5,
-                                spreadRadius: 5,
-                                offset: const Offset(0,3)
-                              ),
+                                  color:
+                                      mainIconBackgroundColor.withOpacity(0.3),
+                                  blurRadius: 5,
+                                  spreadRadius: 5,
+                                  offset: const Offset(0, 3)),
                             ],
                           ),
                           padding: const EdgeInsets.all(12),

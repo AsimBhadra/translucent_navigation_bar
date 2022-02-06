@@ -22,8 +22,8 @@ class TranslucentNavigationBar extends StatelessWidget {
     this.mainTranslucentNavigationBarItem,
     this.verticalPadding = 25.0,
     this.horizontalPadding = 20.0,
-  })  : assert(items.length > 2),
-        assert(items.length < 6),
+  })  : assert(items.length >= 2),
+        assert(items.length <= 6),
         assert(mainTranslucentNavigationBarItem != null
             ? items.length.isEven
             : items.isNotEmpty);

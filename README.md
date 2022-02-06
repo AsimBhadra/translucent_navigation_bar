@@ -1,5 +1,10 @@
 
 Translucent navigation bar with Glassmorphism effect
+
+Light mode             |  Dark mode
+:-------------------------:|:-------------------------:
+![](screenshots/main-icon.gif)  |  ![](screenshots/no-main-icon.gif)
+
 ## Getting Started
 
 To install, add it to your `pubspec.yaml` file:

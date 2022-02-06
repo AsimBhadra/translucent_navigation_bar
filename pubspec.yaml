@@ -1,5 +1,5 @@
 name: translucent_navigation_bar
-description: Implementation of Translucent Navigation Bar.
+description: Implementation of Translucent Navigation Bar with Glassmorphism effect and optional main button with full customizability.
 version: 1.0.0
 homepage: https://github.com/AsimBhadra/translucent_navigation_bar
 
